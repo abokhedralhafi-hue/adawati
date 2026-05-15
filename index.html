@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<meta name="theme-color" content="#0a2540"/>
+<meta name="mobile-web-app-capable" content="yes"/>
+<title>أدويتي</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0a2540;--bg2:#0f3060;--card:rgba(255,255,255,0.06);--cb:rgba(255,255,255,0.12);--t:#fff;--t2:rgba(255,255,255,0.65);--t3:rgba(255,255,255,0.4);--teal:#00d4aa;--td:rgba(0,212,170,0.15);--amber:#fbbf24;--ad:rgba(251,191,36,0.15);--purple:#a78bfa;--pd:rgba(167,139,250,0.15);--blue:#60a5fa;--bd:rgba(96,165,250,0.15);--green:#4ade80;--gd:rgba(74,222,128,0.15);--r:18px;--rs:10px;--f:'Tajawal',sans-serif;--sb:env(safe-area-inset-bottom,16px)}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow:hidden}
+body{font-family:var(--f);background:var(--bg);color:var(--t);display:flex;flex-direction:column;max-width:480px;margin:0 auto}
+.hdr{padding:48px 20px 14px;background:linear-gradient(180deg,var(--bg2),var(--bg));flex-shrink:0}
+.hdr-top{display:flex;align-items:center;justify-content:space-between}
+.hdr-g{font-size:13px;color:var(--t3)}
+.hdr-h{font-size:22px;font-weight:700;margin-top:2px}
+.hdr-ic{width:42px;height:42px;border-radius:12px;background:var(--td);border:1px solid var(--teal);display:flex;align-items:center;justify-content:center;font-size:20px}
+.ds{margin-top:12px;background:var(--card);border:1px solid var(--cb);border-radius:var(--rs);padding:10px 14px;display:flex;align-items:center;justify-content:space-between}
+.pc{position:relative;width:38px;height:38px}
+.pc svg{transform:rotate(-90deg)}
+.bgc{fill:none;stroke:rgba(255,255,255,0.1);stroke-width:3}
+.fgc{fill:none;stroke:var(--teal);stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .5s}
+.pn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:var(--teal)}
+.tabs{display:flex;gap:6px;padding:10px 20px;flex-shrink:0}
+.tab{flex:1;padding:9px 4px;background:var(--card);border:1px solid var(--cb);border-radius:var(--rs);font-family:var(--f);font-size:13px;font-weight:500;color:var(--t2);cursor:pointer;text-align:center;transition:all .2s}
+.tab.active{background:var(--teal);border-color:var(--teal);color:#000;font-weight:700}
+.sa{flex:1;overflow-y:auto;padding:0 16px;padding-bottom:calc(var(--sb) + 80px);-webkit-overflow-scrolling:touch}
+.sa::-webkit-scrollbar{display:none}
+.pg{display:none}.pg.active{display:block}
+.tl{display:flex;align-items:center;gap:10px;padding:14px 4px 10px}
+.tl-ic{font-size:22px}.tl-t{font-size:16px;font-weight:700}.tl-s{font-size:12px;color:var(--t3);margin-right:auto}
+.mc{background:var(--card);border:1px solid var(--cb);border-radius:var(--r);padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:flex-start;cursor:pointer;user-select:none;transition:opacity .3s}
+.mc.done{opacity:0.4}
+.mi{width:48px;height:48px;border-radius:14px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:22px;border:1px solid transparent;position:relative}
+.mc.done .mi::after{content:'✓';position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--green);background:rgba(74,222,128,0.15);border-radius:14px}
+.mb{flex:1;min-width:0}
+.mn{font-size:15px;font-weight:700;margin-bottom:2px}
+.mg{font-size:12px;color:var(--t3);margin-bottom:8px}
+.mbd{display:flex;flex-wrap:wrap;gap:6px}
+.bg{font-size:11px;font-weight:500;padding:4px 10px;border-radius:20px;border:1px solid}
+.b1{color:var(--amber);border-color:var(--amber);background:var(--ad)}
+.b2{color:var(--teal);border-color:var(--teal);background:var(--td)}
+.b3{color:var(--purple);border-color:var(--purple);background:var(--pd)}
+.b4{color:var(--t2);border-color:var(--cb);background:transparent}
+.cb2{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:transparent;border:2px solid var(--cb);display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px;margin-top:4px}
+.mc.done .cb2{background:var(--green);border-color:var(--green);color:#000}
+.wc{background:var(--pd);border:1px solid var(--purple);border-radius:var(--r);padding:16px;margin-bottom:10px}
+.wc-t{font-size:15px;font-weight:700;color:var(--purple)}
+.wc-b{font-size:13px;color:var(--t2);line-height:1.8;margin-top:6px}
+/* SETTINGS */
+.ss{margin-bottom:22px}
+.st{font-size:12px;color:var(--t3);font-weight:500;letter-spacing:.05em;padding:14px 4px 8px;text-transform:uppercase}
+.sc{background:var(--card);border:1px solid var(--cb);border-radius:var(--r);overflow:hidden}
+.sr{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--cb)}
+.sr:last-child{border-bottom:none}
+.sr-l{font-size:14px;font-weight:500}
+.sr-s{font-size:12px;color:var(--t3);margin-top:2px}
+.ti{background:var(--bg2);border:1px solid var(--cb);border-radius:var(--rs);color:var(--t);font-family:var(--f);font-size:18px;font-weight:700;padding:10px 14px;width:120px;text-align:center}
+.ti:focus{outline:none;border-color:var(--teal)}
+.tg{width:50px;height:28px;border-radius:14px;background:rgba(255,255,255,0.1);border:1px solid var(--cb);position:relative;cursor:pointer;transition:background .3s;flex-shrink:0}
+.tg.on{background:var(--teal);border-color:var(--teal)}
+.td2{width:22px;height:22px;border-radius:50%;background:#fff;position:absolute;top:2px;right:3px;transition:transform .3s}
+.tg.on .td2{transform:translateX(-22px)}
+.bb{width:100%;padding:16px;background:var(--teal);border:none;border-radius:var(--r);font-family:var(--f);font-size:16px;font-weight:700;color:#000;cursor:pointer;margin-top:8px}
+.bb:active{opacity:0.8}
+.bb.am{background:var(--amber)}
+.bb.ol{background:transparent;border:1px solid var(--teal);color:var(--teal)}
+.bb.rd{background:#f87171;color:#000}
+/* ALARM SECTION */
+.als{background:var(--td);border:1px solid var(--teal);border-radius:var(--r);padding:16px;margin-bottom:10px}
+.als-t{font-size:14px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.als-b{font-size:12px;color:var(--t2);line-height:1.7;margin-bottom:14px}
+.anb{width:100%;padding:14px 16px;background:var(--bg2);border:1px solid var(--teal);border-radius:var(--rs);font-family:var(--f);font-size:14px;font-weight:700;color:var(--teal);cursor:pointer;text-align:right;display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.anb:last-child{margin-bottom:0}
+.anb:active{opacity:0.7}
+.anb-tx{flex:1}
+.anb-s{font-size:12px;color:var(--t3);font-weight:400;display:block;margin-top:2px}
+/* TIME EDIT BOX */
+.teb{background:var(--card);border:1px solid var(--cb);border-radius:var(--r);padding:16px;margin-bottom:10px}
+.teb-t{font-size:13px;color:var(--t3);margin-bottom:14px;font-weight:500}
+.ter{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--cb)}
+.ter:last-of-type{border-bottom:none}
+.tel{font-size:14px;font-weight:500}
+.tes{font-size:11px;color:var(--t3);margin-top:2px}
+.svb{margin-top:14px;width:100%;padding:14px;background:var(--teal);border:none;border-radius:var(--rs);font-family:var(--f);font-size:15px;font-weight:700;color:#000;cursor:pointer}
+/* OVERLAY */
+.ov{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.88);align-items:center;justify-content:center}
+.ov.show{display:flex}
+.ob{background:var(--bg2);border:2px solid var(--teal);border-radius:var(--r);padding:28px 22px;margin:20px;text-align:center;width:100%;max-width:340px}
+.ap{font-size:60px;animation:pl 1s infinite}
+@keyframes pl{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+.at{font-size:20px;font-weight:700;margin:14px 0 6px;color:var(--teal)}
+.ab2{font-size:14px;color:var(--t2);line-height:1.7;margin-bottom:16px;white-space:pre-line}
+.sc2{display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:12px}
+.sd{width:10px;height:10px;border-radius:50%;background:var(--amber);transition:background .3s}
+.sd.used{background:rgba(255,255,255,0.15)}
+.sl{font-size:12px;color:var(--t3)}
+.snz{width:100%;padding:14px;background:var(--ad);border:1px solid var(--amber);border-radius:var(--r);font-family:var(--f);font-size:15px;font-weight:700;color:var(--amber);cursor:pointer;margin-top:10px}
+.snz:disabled{opacity:0.3;cursor:not-allowed}
+.dnb{width:100%;padding:16px;background:var(--teal);border:none;border-radius:var(--r);font-family:var(--f);font-size:16px;font-weight:700;color:#000;cursor:pointer}
+.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--teal);color:#000;padding:12px 24px;border-radius:40px;font-size:14px;font-weight:700;opacity:0;transition:all .3s;pointer-events:none;z-index:99;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.bn{position:fixed;bottom:0;right:50%;transform:translateX(50%);width:100%;max-width:480px;background:var(--bg2);border-top:1px solid var(--cb);display:flex;padding:8px 16px calc(var(--sb) + 4px);z-index:10}
+.nb{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;background:none;border:none;color:var(--t3);font-family:var(--f);font-size:11px;font-weight:500;cursor:pointer;padding:6px 4px;border-radius:var(--rs)}
+.nb.active{color:var(--teal)}
+.nb-i{font-size:22px}
+.sel{background:var(--bg2);border:1px solid var(--cb);color:var(--t);font-family:var(--f);font-size:14px;padding:8px 12px;border-radius:var(--rs)}
+.ami{background:var(--ad);border:1px solid var(--amber);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.ami-t{font-size:13px;font-weight:700;color:var(--amber);margin-bottom:6px}
+.ami-b{font-size:12px;color:var(--amber);line-height:1.8}
+.nb-box{background:var(--ad);border:1px solid var(--amber);border-radius:var(--r);padding:14px;margin-bottom:10px}
+.nb-t{font-size:13px;color:var(--amber);font-weight:500;margin-bottom:4px}
+.nb-b{font-size:12px;color:var(--amber);line-height:1.7}
+</style>
+</head>
+<body>
+
+<div class="ov" id="ov">
+  <div class="ob">
+    <div class="ap" id="ai">💊</div>
+    <div class="at" id="atl">وقت دوائك!</div>
+    <div class="ab2" id="abo"></div>
+    <div class="sc2">
+      <span class="sl">تأجيلات:</span>
+      <span class="sd" id="sd0"></span><span class="sd" id="sd1"></span><span class="sd" id="sd2"></span>
+    </div>
+    <button class="dnb" onclick="closeAlarm()">✓ تم — أخذت الدواء</button>
+    <button class="snz" id="snzb" onclick="snoozeAlarm()">⏰ تأجيل ٣٠ دقيقة</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="hdr">
+  <div class="hdr-top">
+    <div><div class="hdr-g" id="gr">صباح الخير</div><div class="hdr-h">برنامجك الدوائي 💙</div></div>
+    <div class="hdr-ic">❤️</div>
+  </div>
+  <div class="ds">
+    <div><div style="font-size:14px;font-weight:500" id="dt">—</div><div style="font-size:12px;color:var(--t3)" id="tt">—</div></div>
+    <div class="pc">
+      <svg viewBox="0 0 38 38" width="38" height="38">
+        <circle class="bgc" cx="19" cy="19" r="16"/>
+        <circle class="fgc" id="pc" cx="19" cy="19" r="16" stroke-dasharray="100.53" stroke-dashoffset="100.53"/>
+      </svg>
+      <div class="pn" id="pn">0%</div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab active" onclick="sw('today',this)">اليوم</button>
+  <button class="tab" onclick="sw('meds',this)">الأدوية</button>
+  <button class="tab" onclick="sw('settings',this)">الإعدادات</button>
+</div>
+
+<div class="sa">
+
+<!-- TODAY -->
+<div class="pg active" id="pg-today">
+
+  <div class="tl"><span class="tl-ic">🌅</span><span class="tl-t">وجبة الصباح</span><span class="tl-s" id="md">١٠:٠٠ ص</span></div>
+
+  <div class="mc" id="c-camzyos" onclick="td(this,'camzyos')">
+    <div class="mi" style="background:rgba(248,113,113,0.15);border-color:#f87171"><span>💊</span></div>
+    <div class="mb"><div class="mn">كامزيوس</div><div class="mg">Camzyos 5mg</div>
+    <div class="mbd"><span class="bg b2">مع الإفطار أو بعده</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+  <div class="mc" id="c-carvedilol-am" onclick="td(this,'carvedilol-am')">
+    <div class="mi" style="background:rgba(96,165,250,0.15);border-color:#60a5fa"><span>💙</span></div>
+    <div class="mb"><div class="mn">كاريليو — صباح</div><div class="mg">Carvedilol 50mg</div>
+    <div class="mbd"><span class="bg b2">مع الإفطار أو بعده</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+  <div class="mc" id="c-omega3" onclick="td(this,'omega3')">
+    <div class="mi" style="background:rgba(0,212,170,0.15);border-color:#00d4aa"><span>🐟</span></div>
+    <div class="mb"><div class="mn">أوميغا ٣</div><div class="mg">Omega-3 1425mg</div>
+    <div class="mbd"><span class="bg b3">مع دهون</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+  <div class="mc" id="c-k2" onclick="td(this,'k2')">
+    <div class="mi" style="background:rgba(167,139,250,0.15);border-color:#a78bfa"><span>🦴</span></div>
+    <div class="mb"><div class="mn">فيتامين K2</div><div class="mg">100mcg — يومياً</div>
+    <div class="mbd"><span class="bg b3">مع دهون</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+  <div class="mc" id="c-b12" onclick="td(this,'b12')">
+    <div class="mi" style="background:rgba(251,191,36,0.15);border-color:#fbbf24"><span>⚡</span></div>
+    <div class="mb"><div class="mn">فيتامين B12</div><div class="mg">1000mcg — كورس</div>
+    <div class="mbd"><span class="bg b1">قبل الإفطار أو معه</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+  <div id="d3y" class="wc" style="display:none">
+    <div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px">☀️</span><span class="wc-t">اليوم يوم D3 الأسبوعي!</span></div>
+    <div class="wc-b">فيتامين D3 — 50,000 وحدة — مع وجبة دسمة (بيض، زيت، أفوكادو)</div>
+  </div>
+  <div id="d3n" class="wc">
+    <div style="display:flex;align-items:center;gap:10px"><span style="font-size:26px">📅</span><span class="wc-t">D3 الأسبوعي — <span id="d3dn">الجمعة</span></span></div>
+    <div class="wc-b">50,000 وحدة — الجرعة القادمة بعد <strong id="d3dy">—</strong></div>
+  </div>
+
+  <div class="tl" style="margin-top:8px"><span class="tl-ic">🌆</span><span class="tl-t">وجبة المساء</span><span class="tl-s" id="ed">١٠:٠٠ م</span></div>
+
+  <div class="mc" id="c-carvedilol-pm" onclick="td(this,'carvedilol-pm')">
+    <div class="mi" style="background:rgba(96,165,250,0.15);border-color:#60a5fa"><span>💙</span></div>
+    <div class="mb"><div class="mn">كاريليو — مساء</div><div class="mg">Carvedilol 50mg — كل ١٢ ساعة</div>
+    <div class="mbd"><span class="bg b2">مع العشاء أو بعده</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+  <div class="mc" id="c-livazo" onclick="td(this,'livazo')">
+    <div class="mi" style="background:rgba(74,222,128,0.15);border-color:#4ade80"><span>🟢</span></div>
+    <div class="mb"><div class="mn">ليفازو — كورس</div><div class="mg">Livazo 2mg</div>
+    <div class="mbd"><span class="bg b2">بعد العشاء أو قبل النوم</span><span class="bg b4">حبة واحدة</span></div></div>
+    <div class="cb2">✓</div>
+  </div>
+
+</div>
+
+<!-- MEDS -->
+<div class="pg" id="pg-meds">
+  <div style="padding:10px 0 4px;font-size:13px;color:var(--t3)">جميع أدويتك ومعلوماتها</div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">💊 كامزيوس 5mg</div><div class="sr-s">صباحاً — مع الإفطار أو بعده — لضخامة القلب HCM</div></div></div>
+    <div class="sr" style="background:rgba(248,113,113,0.08)"><div class="sr-s" style="color:var(--amber)">⚠️ لا تفوّت جرعة أبداً — يتفاعل مع أدوية كثيرة</div></div>
+  </div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">💙 كاريليو 50mg</div><div class="sr-s">مرتان — كل ١٢ ساعة — مع الوجبة</div></div></div>
+    <div class="sr" style="background:rgba(248,113,113,0.08)"><div class="sr-s" style="color:var(--amber)">⚠️ لا تقف عنه فجأة — يراقَب بالإيكو مع كامزيوس</div></div>
+  </div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">🐟 أوميغا ٣ 1425mg</div><div class="sr-s">صباحاً — مع وجبة دسمة</div></div></div>
+  </div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">🦴 فيتامين K2 100mcg</div><div class="sr-s">يومياً (ليس أسبوعياً) — مع دهون</div></div></div>
+    <div class="sr" style="background:rgba(0,212,170,0.06)"><div class="sr-s" style="color:var(--teal)">💡 ضروري يومياً مع D3 لحماية شرايين القلب</div></div>
+  </div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">☀️ فيتامين D3 50,000 IU</div><div class="sr-s">مرة أسبوعياً — مع وجبة دسمة (بيض، زيت، أفوكادو)</div></div></div>
+  </div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">⚡ فيتامين B12 1000mcg</div><div class="sr-s">صباحاً — كورس — قبل الإفطار أو معه</div></div></div>
+  </div>
+  <div class="sc" style="margin-bottom:10px">
+    <div class="sr"><div><div class="sr-l">🟢 ليفازو 2mg</div><div class="sr-s">مساءً / قبل النوم — كورس</div></div></div>
+    <div class="sr" style="background:rgba(0,212,170,0.06)"><div class="sr-s" style="color:var(--teal)">💡 الستاتين يُستنزف معه CoQ10 — يمكن تعويضه</div></div>
+  </div>
+</div>
+
+<!-- SETTINGS -->
+<div class="pg" id="pg-settings">
+
+  <div class="ss">
+    <div class="st">⏰ تعديل المواعيد يدوياً</div>
+    <div class="teb">
+      <div class="teb-t">عدّل الوقت كما تريد ثم اضغط حفظ</div>
+      <div class="ter">
+        <div><div class="tel">🌅 وجبة الصباح</div><div class="tes">كامزيوس، كاريليو، أوميغا، K2، B12</div></div>
+        <input type="time" class="ti" id="mt" value="10:00" onchange="upd()"/>
+      </div>
+      <div class="ter">
+        <div><div class="tel">🌆 وجبة المساء</div><div class="tes">كاريليو الثاني + ليفازو</div></div>
+        <input type="time" class="ti" id="et" value="22:00" onchange="upd()"/>
+      </div>
+      <div class="ter">
+        <div><div class="tel">📅 يوم D3 الأسبوعي</div><div class="tes">فيتامين D3 — 50,000 وحدة</div></div>
+        <select class="sel" id="d3d" onchange="saveSt()">
+          <option value="0">الأحد</option><option value="1">الاثنين</option>
+          <option value="2">الثلاثاء</option><option value="3">الأربعاء</option>
+          <option value="4">الخميس</option><option value="5" selected>الجمعة</option>
+          <option value="6">السبت</option>
+        </select>
+      </div>
+      <button class="svb" onclick="saveSt()">💾 حفظ المواعيد</button>
+    </div>
+  </div>
+
+  <div class="ss">
+    <div class="st">🔔 ضبط منبّه الجوال مباشرة</div>
+    <div class="als">
+      <div class="als-t">اضغط لفتح ساعة الجوال جاهزة</div>
+      <div class="als-b">اضغط على أي زر أدناه — سيفتح تطبيق الساعة مع ضبط الوقت تلقائياً. اضغط <strong style="color:var(--teal)">حفظ</strong> في الساعة ليتكرر كل يوم.</div>
+      <button class="anb" onclick="na('m')">
+        <span style="font-size:20px">🌅</span>
+        <span class="anb-tx">منبّه الصباح<span class="anb-s" id="aml">١٠:٠٠ صباحاً</span></span>
+        <span>←</span>
+      </button>
+      <button class="anb" onclick="na('e')">
+        <span style="font-size:20px">🌆</span>
+        <span class="anb-tx">منبّه المساء<span class="anb-s" id="ael">١٠:٠٠ مساءً</span></span>
+        <span>←</span>
+      </button>
+      <button class="anb" onclick="na('d')">
+        <span style="font-size:20px">☀️</span>
+        <span class="anb-tx">منبّه D3 الأسبوعي<span class="anb-s">يوم <span id="adl">الجمعة</span></span></span>
+        <span>←</span>
+      </button>
+    </div>
+    <div class="ami">
+      <div class="ami-t">📌 إذا لم يفتح تطبيق الساعة تلقائياً:</div>
+      <div class="ami-b">
+        افتح تطبيق <strong>الساعة</strong> في جوالك يدوياً<br>
+        اضغط <strong>إضافة منبّه +</strong><br>
+        اضبط الوقت واكتب الاسم يدوياً<br>
+        فعّل <strong>التكرار</strong> ← كل يوم
+      </div>
+    </div>
+  </div>
+
+  <div class="ss">
+    <div class="st">📳 تنبيه داخل التطبيق</div>
+    <div class="sc">
+      <div class="sr">
+        <div><div class="sr-l">تنبيه داخلي</div><div class="sr-s">يعمل عند فتح التطبيق فقط</div></div>
+        <div class="tg" id="ntg" onclick="togN()"><div class="td2"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ss">
+    <div class="st">إجراءات</div>
+    <button class="bb am" onclick="testA()">🔔 اختبر التنبيه الداخلي</button>
+    <button class="bb ol" style="margin-top:10px" onclick="resetDay()">🔄 إعادة تعيين اليوم</button>
+    <button class="bb rd" style="margin-top:10px" onclick="resetAll()">⚠️ مسح كل البيانات</button>
+  </div>
+
+  <div style="font-size:11px;color:var(--t3);text-align:center;line-height:1.8;padding:0 4px 10px">
+    للتذكير فقط — لا يُغني عن تعليمات طبيبك.<br>HCM يحتاج متابعة طبية دورية.
+  </div>
+</div>
+
+</div>
+
+<div class="bn">
+  <button class="nb active" id="nav-today" onclick="swN('today',this)"><span class="nb-i">📋</span>اليوم</button>
+  <button class="nb" id="nav-meds" onclick="swN('meds',this)"><span class="nb-i">💊</span>الأدوية</button>
+  <button class="nb" id="nav-settings" onclick="swN('settings',this)"><span class="nb-i">⚙️</span>الإعدادات</button>
+</div>
+
+<script>
+const DA=['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+const MA=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+let S=JSON.parse(localStorage.getItem('ds')||'{}');
+S.m=S.m||'10:00';S.e=S.e||'22:00';S.d3=S.d3!==undefined?S.d3:5;S.n=S.n||false;
+let done=JSON.parse(localStorage.getItem('dd-'+dk())||'{}');
+function dk(){const d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+window.addEventListener('load',()=>{
+  document.getElementById('mt').value=S.m;
+  document.getElementById('et').value=S.e;
+  document.getElementById('d3d').value=S.d3;
+  if(S.n)document.getElementById('ntg').classList.add('on');
+  clk();setInterval(clk,30000);
+  restD();updP();chkD3();upd();schA();
+});
+function clk(){
+  const n=new Date(),h=n.getHours(),m=n.getMinutes().toString().padStart(2,'0');
+  const ap=h>=12?'م':'ص',h12=h%12||12;
+  document.getElementById('gr').textContent=h<12?'صباح الخير':h<17?'مساء الخير':'مساء النور';
+  document.getElementById('tt').textContent=h12+':'+m+' '+ap;
+  document.getElementById('dt').textContent=DA[n.getDay()]+'، '+n.getDate()+' '+MA[n.getMonth()];
+}
+function fat(t){
+  const[h,m]=t.split(':').map(Number),ap=h>=12?'م':'ص',h12=h%12||12;
+  return h12+':'+m.toString().padStart(2,'0')+' '+ap;
+}
+function upd(){
+  const mv=document.getElementById('mt').value||S.m;
+  const ev=document.getElementById('et').value||S.e;
+  document.getElementById('md').textContent=fat(mv);
+  document.getElementById('ed').textContent=fat(ev);
+  document.getElementById('aml').textContent=fat(mv);
+  document.getElementById('ael').textContent=fat(ev);
+}
+function chkD3(){
+  const t=new Date().getDay(),d=parseInt(S.d3);
+  document.getElementById('d3dn').textContent=DA[d];
+  document.getElementById('adl').textContent=DA[d];
+  if(t===d){document.getElementById('d3y').style.display='block';document.getElementById('d3n').style.display='none';}
+  else{document.getElementById('d3y').style.display='none';document.getElementById('d3n').style.display='block';
+  document.getElementById('d3dy').textContent=((d-t+7)%7||7)+' أيام';}
+}
+function saveSt(){
+  S.m=document.getElementById('mt').value;
+  S.e=document.getElementById('et').value;
+  S.d3=parseInt(document.getElementById('d3d').value);
+  localStorage.setItem('ds',JSON.stringify(S));
+  upd();chkD3();schA();toast('✓ تم حفظ المواعيد');
+}
+function na(t){
+  let h,m,msg;
+  if(t==='m'){[h,m]=S.m.split(':').map(Number);msg='وجبة الصباح - كامزيوس كاريليو اوميغا K2 B12';}
+  else if(t==='e'){[h,m]=S.e.split(':').map(Number);msg='وجبة المساء - كاريليو ليفازو';}
+  else{[h,m]=[10,0];msg='D3 الاسبوعي 50000 وحدة';}
+  const url='intent:#Intent;action=android.intent.action.SET_ALARM;S.android.intent.extra.alarm.MESSAGE='+encodeURIComponent(msg)+';i.android.intent.extra.alarm.HOUR='+h+';i.android.intent.extra.alarm.MINUTES='+m+';B.android.intent.extra.alarm.SKIP_UI=false;end';
+  window.location.href=url;
+  toast('جاري فتح تطبيق الساعة...');
+}
+function td(card,id){
+  done[id]=!done[id];card.classList.toggle('done',done[id]);
+  localStorage.setItem('dd-'+dk(),JSON.stringify(done));
+  updP();if(done[id])toast('✓ تم تسجيل الجرعة');
+}
+function restD(){
+  ['camzyos','carvedilol-am','omega3','k2','b12','carvedilol-pm','livazo'].forEach(id=>{
+    if(done[id]){const c=document.getElementById('c-'+id);if(c)c.classList.add('done');}
+  });
+}
+function updP(){
+  const ids=['camzyos','carvedilol-am','omega3','k2','b12','carvedilol-pm','livazo'];
+  const p=Math.round(ids.filter(i=>done[i]).length/ids.length*100);
+  document.getElementById('pc').style.strokeDashoffset=100.53-(100.53*p/100);
+  document.getElementById('pn').textContent=p+'%';
+}
+function resetDay(){done={};localStorage.setItem('dd-'+dk(),'{}');document.querySelectorAll('.mc').forEach(c=>c.classList.remove('done'));updP();toast('تم إعادة تعيين اليوم');}
+function resetAll(){if(confirm('مسح كل البيانات؟')){localStorage.clear();location.reload();}}
+function sw(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');btn.classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  const nb=document.getElementById('nav-'+id);if(nb)nb.classList.add('active');
+}
+function swN(id,btn){
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('pg-'+id).classList.add('active');btn.classList.add('active');
+  const t=['today','meds','settings'].indexOf(id);
+  const tabs=document.querySelectorAll('.tab');if(t>=0&&tabs[t])tabs[t].classList.add('active');
+}
+async function togN(){
+  const tg=document.getElementById('ntg');
+  if(!tg.classList.contains('on')){
+    if(!('Notification'in window)){toast('غير مدعوم');return;}
+    const p=await Notification.requestPermission();
+    if(p==='granted'){tg.classList.add('on');S.n=true;localStorage.setItem('ds',JSON.stringify(S));schA();toast('✓ التنبيهات مفعّلة');}
+    else toast('اسمح بالإشعارات من إعدادات المتصفح');
+  } else {tg.classList.remove('on');S.n=false;localStorage.setItem('ds',JSON.stringify(S));toast('تم إيقاف التنبيهات');}
+}
+const MX=3,SZ=30*60*1000;
+let sc=0,st=null,ca=null,ats=[];
+function usd(){
+  const r=MX-sc;
+  for(let i=0;i<MX;i++){const d=document.getElementById('sd'+i);if(d)d.classList.toggle('used',i>=r);}
+  const b=document.getElementById('snzb');if(!b)return;
+  if(r<=0){b.disabled=true;b.textContent='انتهت فرص التأجيل';}
+  else{b.disabled=false;b.textContent='⏰ تأجيل ٣٠ دقيقة';}
+}
+function fireAlarm(tl,bo,ic,fs){
+  if(!fs)sc=0;ca={tl,bo,ic};
+  document.getElementById('ai').textContent=ic;
+  document.getElementById('atl').textContent=tl;
+  document.getElementById('abo').textContent=bo;
+  document.getElementById('ov').classList.add('show');usd();
+  if(S.n&&Notification.permission==='granted')new Notification(tl,{body:bo});
+  try{navigator.vibrate&&navigator.vibrate([400,200,400,200,400]);}catch(e){}
+  if(!fs)schA();
+}
+function snoozeAlarm(){
+  if(sc>=MX||!ca)return;sc++;clearTimeout(st);
+  document.getElementById('ov').classList.remove('show');
+  st=setTimeout(()=>fireAlarm(ca.tl,ca.bo,ca.ic,true),SZ);
+  const r=MX-sc;toast(r===0?'⚠️ آخر تأجيل':'سيُذكّرك بعد ٣٠ دقيقة · متبقٍ '+r);
+}
+function closeAlarm(){clearTimeout(st);st=null;ca=null;sc=0;document.getElementById('ov').classList.remove('show');}
+function testA(){fireAlarm('اختبار التنبيه 🔔','التطبيق يعمل بشكل صحيح ✓','✅',false);}
+function schA(){
+  ats.forEach(clearTimeout);ats=[];
+  const now=new Date();
+  function s(t,tl,bo,ic){
+    const[h,m]=t.split(':').map(Number);
+    const d=new Date();d.setHours(h,m,0,0);
+    if(d<=now)d.setDate(d.getDate()+1);
+    ats.push(setTimeout(()=>fireAlarm(tl,bo,ic,false),d-now));
+  }
+  s(S.m,'وقت جرعة الصباح! 🌅','كامزيوس، كاريليو، أوميغا ٣، K2، B12\nمع الإفطار أو بعده','💊');
+  s(S.e,'وقت جرعة المساء! 🌆','كاريليو + ليفازو\nمع العشاء أو بعده','💙');
+}
+function toast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
+}
+</script>
+</body>
+</html>
